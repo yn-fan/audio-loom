@@ -1,0 +1,33 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Toolchain
+        run: |
+          sw_vers
+          swift --version
+      - name: Build bundled MP3 encoder from verified source
+        run: bash Tools/build-lame.sh
+      - name: Run synthetic-data unit tests
+        run: swift test
+      - name: Build locally signed app
+        run: bash build.sh
+      - name: Verify app bundle
+        run: |
+          codesign --verify --deep --strict "dist/声流.app"
+          plutil -lint "dist/声流.app/Contents/Info.plist"

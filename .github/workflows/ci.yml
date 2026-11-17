@@ -31,3 +31,6 @@ jobs:
         run: |
           codesign --verify --deep --strict "dist/声流.app"
           plutil -lint "dist/声流.app/Contents/Info.plist"
+          test -f "dist/声流.app/Contents/Resources/LICENSE"
+          test -f "dist/声流.app/Contents/Resources/LAME/COPYING"
+          test -f "dist/声流.app/Contents/Resources/LAME/lame-3.100.tar.gz"

@@ -14,6 +14,7 @@ BIN="$(swift build --package-path "$ROOT" --scratch-path "$SCRATCH" -c release -
 mkdir -p "$DEST/Contents/MacOS" "$DEST/Contents/Resources/LAME" "$DEST/Contents/Frameworks"
 cp "$BIN/AudioLoom" "$DEST/Contents/MacOS/AudioLoom"
 cp "$ROOT/Resources/Info.plist" "$DEST/Contents/Info.plist"
+cp "$ROOT/LICENSE" "$DEST/Contents/Resources/LICENSE"
 cp "$ROOT/THIRD_PARTY_NOTICES.md" "$DEST/Contents/Resources/THIRD_PARTY_NOTICES.md"
 cp "$ROOT/Vendor/LAME/libmp3lame.0.dylib" "$DEST/Contents/Frameworks/"
 cp "$ROOT/Vendor/LAME/COPYING" "$ROOT/Vendor/LAME/README.md" "$ROOT/Vendor/LAME/lame-3.100.tar.gz" "$DEST/Contents/Resources/LAME/"
